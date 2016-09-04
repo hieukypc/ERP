@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+	
+		<!-- Main Menu Related Info -->
+		<menuitem name="Daily Transaction" id="base.daily_transaction_root"
+			sequence="60" />
+	
+		<!-- Sub Menu Related Info -->
+		<menuitem id="menu_daily_transaction_root" name="Daily Transaction"
+			parent="base.daily_transaction_root" sequence="1" />
+	
+		<!-- Action Menu Related Info -->
+		<menuitem action="action_daily_transaction" id="menu_action_daily_transaction"
+			parent="menu_daily_transaction_root" sequence="20" />		
+	
+		<!-- Daily Transaction View -->
+		<record id="view_daily_transaction_tree" model="ir.ui.view"> <!-- here id is the 
+				external id for this tree view which must be unique and will be used for 
+				accessing this record -->
+			<field name="name">daily.transaction.tree</field> <!-- this will be our name of record in ir.ui.view -->
+			<field name="model">daily.transaction</field> <!-- this will map out tree view with our daily transaction model -->
+			<field name="arch" type="xml">
+				<!-- this will be our title of list/tree view -->
+				<tree string="Daily Transaction">
+					<!-- These will automatically map table headers for our list view, so 
+						we'll select out column names of our model here -->
+					<field name="subject" />
+					<field name="date" />
+					<field name="type" />
+					<field name="amount" />
+				</tree>
+			</field>
+		</record>
+	
+		<!-- Daily Transaction Form View -->
+		<record id="view_daily_transaction_form" model="ir.ui.view">
+			<field name="name">daily.transaction.form.view</field>
+			<field name="model">daily.transaction</field>
+			<field name="arch" type="xml">
+				<!-- this will be our title of list/tree view -->
+				<form string="Daily Transaction" version="9.0">
+					<group>
+						<field name="subject" />
+						<field name="date" />
+						<field name="type" />
+						<field name="amount" />
+						<field name="note"/>
+					</group>
+				</form>
+			</field>
+		</record>
+	
+		<!-- Actions -->
+		<record id="action_daily_transaction" model="ir.actions.act_window">
+			<field name="name">Daily Transaction</field> <!-- name of action -->
+			<field name="res_model">daily.transaction</field> <!-- this action will be mapped to model specified -->
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field> <!-- there are type of view our module will show for our daily transaction 
+				mode -->
+			<field name="search_view_id" eval="False" /> <!-- here we specify id of our search view -->
+			<field name="context">{}</field>
+			<field name="help">Create new daily transaction.</field> <!-- help text for our model -->
+		</record>
+
+					
+	</data>
+</openerp>
