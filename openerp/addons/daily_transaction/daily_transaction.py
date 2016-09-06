@@ -8,7 +8,7 @@ class daily_transation(osv.osv):
         'subject': fields.char('Subject', size=128, require=True),
         'date': fields.date('Date', require=True),
         'note': fields.text('Notes'),
-        'amount': fields.float('Amount', require=True, digits=lambda cr: (32, 32)),
+        'amount': fields.float('Amount', require=True),
         'type': fields.selection([
             ('transport', 'Transport'),
             ('household', 'Household'),

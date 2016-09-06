@@ -10,9 +10,7 @@
 		<menuitem id="menu_daily_transaction_root" name="Daily Transaction"
 			parent="base.daily_transaction_root" sequence="1" />
 	
-		<!-- Action Menu Related Info -->
-		<menuitem action="action_daily_transaction" id="menu_action_daily_transaction"
-			parent="menu_daily_transaction_root" sequence="20" />		
+				
 	
 		<!-- Daily Transaction View -->
 		<record id="view_daily_transaction_tree" model="ir.ui.view"> <!-- here id is the 
@@ -63,6 +61,9 @@
 			<field name="help">Create new daily transaction.</field> <!-- help text for our model -->
 		</record>
 
-					
+		<!-- Action Menu Related Info -->
+		<menuitem action="action_daily_transaction" id="menu_action_daily_transaction"
+			parent="menu_daily_transaction_root" sequence="20" />
+								
 	</data>
 </openerp>
