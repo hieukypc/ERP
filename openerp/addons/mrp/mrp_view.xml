@@ -262,12 +262,89 @@
                                 <field name="company_id" options="{'no_create': True}" groups="base.group_multi_company"/>
                             </group>
                         </group>
+                        
+                        <notebook>
+                        	<page string="Data Input">
+                        		<field name="input_ids" string="Data Input" widget="one2many_list">
+	                                <tree string="Data Input" editable="bottom">
+	                                    <field name="name"/>
+	                                    <field name="code"/>
+	                                </tree>
+	                            </field>
+                        	</page>
+                        	<page string="Data Output">
+                        		<!-- <field name="description"/>
+                        		<field name="code"/> -->
+                        		<field name="output_ids" string="Data Output" widget="one2many_list">
+                        			<tree string="Data Output" editable="bottom">
+                        				<field name="name"/>
+                        				<field name="code"/>
+                        			</tree>
+                        		</field>
+                        	</page>
+                        	<page string="Loss">
+                        		<field name="note"/>
+                        	</page>
+                        	<page string="Assignment">
+                        		<field name="note"/>
+                        	</page>
+                        </notebook>
                         <label for="note"/>
                         <field name="note"/>
                     </sheet>
                 </form>
             </field>
         </record>
+        <!-- Define new view for work center property input, output -->
+        <record id="mrp_routing_workcenter_process_input_tree_view" model="ir.ui.view">
+        	<field name="name">mrp.routing.workcenter.process.input.tree</field>
+        	<field name="model">mrp.routing.workcenter.input</field>
+        	<field name="arch" type="xml">
+        		<tree string="Data property">
+        			<field name="name"/>
+        			<field name="code"/>
+        		</tree>
+        	</field>
+        </record>
+        <record id="mrp_routing_workcenter_process_input_form_view" model="ir.ui.view">
+        	<field name="name">mrp.routing.workcenter.process.input.form</field>
+        	<field name="model">mrp.routing.workcenter.input</field>
+        	<field name="arch" type="xml">
+        		<form string="Create Data property input">
+        			<sheet>
+        				<group>
+		        			<field name="name"/>
+		        			<field name="code"/>
+		        		</group>
+	        		</sheet>
+        		</form>
+        	</field>
+        </record>
+        <record id="mrp_routing_workcenter_process_output_tree_view" model="ir.ui.view">
+        	<field name="name">mrp.routing.workcenter.process.output.tree</field>
+        	<field name="model">mrp.routing.workcenter.output</field>
+        	<field name="arch" type="xml">
+        		<tree string="Data property output">
+        			<field name="name"/>
+        			<field name="code"/>
+        		</tree>
+        	</field>
+        </record>
+        <record id="mrp_routing_workcenter_process_output_form_view" model="ir.ui.view">
+        	<field name="name">mrp.routing.workcenter.process.output.form</field>
+        	<field name="model">mrp.routing.workcenter.output</field>
+        	<field name="arch" type="xml">
+        		<form string="Create Data property output">
+        			<sheet>
+	        			<group>
+		        			<field name="name"/>
+		        			<field name="code"/>
+		        		</group>
+		        	</sheet>
+        		</form>
+        	</field>
+        </record>
+        <!--  -->
         <record id="mrp_workcenter_action" model="ir.actions.act_window">
             <field name="name">Work Centers</field>
             <field name="type">ir.actions.act_window</field>
@@ -369,6 +446,25 @@
         </record>
         <menuitem id="menu_mrp_routing_action"
           action="mrp_routing_action"
+          parent="menu_mrp_configuration"
+          groups="group_mrp_routings"
+          sequence="50"/>
+        
+        <!-- Define record for menu Property Input -->
+        <record id="mrp_input_data_action" model="ir.actions.act_window">
+            <field name="name">Input Property Data</field>
+            <field name="res_model">mrp.routing.workcenter.input</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to create a new property input data.
+              </p><p>
+                Input property data allow you create property for input, output help support view report.
+              </p>
+            </field>
+        </record>  
+        <!-- Menu input data -->
+        <menuitem id="menu_mrp_input_data_action"
+          action="mrp_input_data_action"
           parent="menu_mrp_configuration"
           groups="group_mrp_routings"
           sequence="50"/>
