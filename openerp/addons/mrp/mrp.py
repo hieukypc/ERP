@@ -65,8 +65,8 @@ class mrp_workcenter(osv.osv):
         'costs_cycle_account_id': fields.many2one('account.analytic.account', 'Cycle Account',
             help="Fill this only if you want automatic analytic accounting entries on production orders.", domain=[('account_type', '=', 'normal')]),
         'costs_general_account_id': fields.many2one('account.account', 'General Account', domain=[('deprecated', '=', False)]),
-        'resource_id': fields.many2one('resource.resource','Resource', ondelete='cascade', required=True),
-        'product_id': fields.many2one('product.product','Work Center Product', help="Fill this product to easily track your production costs in the analytic accounting."), 
+        'resource_id': fields.many2one('resource.resource','Resource', ondelete='cascade', required=True, domain=[('resource_type'), '=', 'user']),
+        'product_id': fields.many2one('product.product','Work Center Product', help="Fill this product to easily track your production costs in the analytic accounting."),
     }
     _defaults = {
         'capacity_per_cycle': 1.0,
@@ -135,12 +135,10 @@ class mrp_routing_workcenter(osv.osv):
              help="Routings indicates all the Work Centers used, for how long and/or cycles." \
                 "If Routings is set then,the third tab of a production order (Work Centers) will be automatically pre-completed."),
 #------------------------------------------------------------------------------ 
-        'data_routing_table_label': fields.text('Table Data Source'),
-#------------------------------------------------------------------------------ 
-        'input_ids': fields.one2many('mrp.routing.workcenter.input', 'input_id', 'Work Center Property Input', copy=True),
-        'output_ids': fields.one2many('mrp.routing.workcenter.output', 'output_id', 'Work Center Property Output', copy=True),
-        #------------------------ 'loss_ids': fields.many2many('', 'Loss Data'),
-        #----------------- 'assignment_ids': fields.many2many('', 'Assignment'),
+        'input_ids': fields.one2many('mrp.routing.workcenter.input', 'workcenter_operation_id', 'Work Center Property Input', copy=True),
+        'output_ids': fields.one2many('mrp.routing.workcenter.output', 'workcenter_operation_id', 'Work Center Property Output', copy=True),
+        'loss_ids': fields.one2many('mrp.routing.workcenter.loss', 'workcenter_operation_id', 'Loss Data', copy=True),
+        'assignment_ids': fields.one2many('mrp.routing.workcenter.assignment', 'workcenter_operation_id', 'Assignment', copy=True),
 #------------------------------------------------------------------------------ 
         'note': fields.text('Description'),
         'company_id': fields.related('routing_id', 'company_id', type='many2one', relation='res.company', string='Company', store=True, readonly=True),
