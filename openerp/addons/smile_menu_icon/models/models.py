@@ -42,9 +42,9 @@ class IrUiMenu(models.Model):
         return res
 
     @api.cr_uid_context
-    @tools.ormcache_context('uid', keys=('lang',))
-    def load_menus(self, cr, uid, context=None):
+    @tools.ormcache_context('uid', 'debug', keys=('lang',))
+    def load_menus(self, cr, uid, debug, context=None):
         context = context or {}
         context['new_menu_fields_to_read'] = ['fa_icon']
-        res = super(IrUiMenu, self).load_menus(cr, uid, context=context)
+        res = super(IrUiMenu, self).load_menus(cr, uid, debug, context=context)
         return res

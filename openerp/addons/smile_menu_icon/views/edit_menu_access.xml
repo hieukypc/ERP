@@ -7,7 +7,7 @@
       <field name="model">ir.ui.menu</field>
       <field name="inherit_id" ref="base.edit_menu_access"/>
       <field name="arch" type="xml">
-        <xpath expr="//field[@name='icon']" position="after">
+        <xpath expr="//field[@name='parent_id']" position="after">
 	  <field name="fa_icon" />
 	</xpath>
       </field>
